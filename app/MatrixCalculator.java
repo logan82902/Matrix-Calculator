@@ -1,8 +1,8 @@
 package app;
 
 public class MatrixCalculator{
-    public static void main(String[] args) { 
-        System.out.println("\nHello\n");
-    }        
+    public String test(){
+        return "This is where logic for the application will go";
+    }
 
 }
