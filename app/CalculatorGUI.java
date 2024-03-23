@@ -7,8 +7,10 @@ import java.awt.event.ActionListener;
 
 public class CalculatorGUI extends JFrame {
 
+    private Mode m_mode;
 
     public CalculatorGUI() {
+        m_mode = Mode.ADDITION;
         setTitle("Matrix Calculator");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -52,6 +54,9 @@ public class CalculatorGUI extends JFrame {
         matrix2.setLineWrap(true);
         matrix2.setWrapStyleWord(true);
 
+        JButton calculateButton = new JButton("Calculate");
+        calculateButton.setBounds(400, 275, 250, 40);
+
         JScrollPane matrix2ScrollPane = new JScrollPane(matrix2);
         matrix2ScrollPane.setPreferredSize(new Dimension(250, 200));
         matrix2ScrollPane.setBounds(400, 50, 250, 200); // Set bounds (x, y, width, height)
@@ -74,8 +79,17 @@ public class CalculatorGUI extends JFrame {
                 JRadioButton radioButton = (JRadioButton) e.getSource();
                 if (radioButton.getText().equals("Inverse")) {
                     matrix2ScrollPane.setVisible(false);
+                    m_mode = Mode.INVERSE;
                 } else {
-                    matrix2ScrollPane.setVisible(true);
+                    if (radioButton.getText().equals("Add")) {
+                        m_mode = Mode.ADDITION;
+                    } else if (radioButton.getText().equals("Subtract")) {
+                        m_mode = Mode.SUBTRACTION;
+                    } else if (radioButton.getText().equals("Multiply")) {
+                        m_mode = Mode.MULTIPLICATION;
+                    } else if (radioButton.getText().equals("Dot Product")) {
+                        m_mode = Mode.DOT_PRODUCT;
+                    }
                 }
             }
         };
@@ -90,6 +104,7 @@ public class CalculatorGUI extends JFrame {
         getContentPane().add(matrix1ScrollPane);
         getContentPane().add(radioPanel);
         getContentPane().add(matrix2ScrollPane);
+        getContentPane().add(calculateButton);
         getContentPane().add(equalsLabel);
         getContentPane().add(resultMatrixScrollPane);
 
